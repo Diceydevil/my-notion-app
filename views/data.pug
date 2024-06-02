@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title Notion Data Display
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    h1 Notion Data Overview
+    if data.results
+      ul
+        each item in data.results
+          li
+            if item.properties['Task name'] && item.properties['Task name'].title && item.properties['Task name'].title.length > 0
+              h2= item.properties['Task name'].title[0].plain_text
+            else
+              h2 No Task Name Provided
+            p= "Date Created: " + (item.created_time || 'Unknown')
+            p= "Last Edited: " + (item.last_edited_time || 'Unknown')
+    else
+      p No data available.
